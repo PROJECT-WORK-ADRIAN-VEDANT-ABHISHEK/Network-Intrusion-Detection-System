@@ -1,0 +1,137 @@
+>>> capture[0].eth.field_names
+['dst', 'dst_resolved', 'dst_oui', 'dst_oui_resolved', 'addr', 'addr_resolved', 'addr_oui', 'addr_oui_resolved', 'dst_lg', 'lg', 'dst_ig', 'ig', 'src', 'src_resolved', 'src_oui', 'src_oui_resolved', 'src_lg', 'src_ig', 'type']
+
+>>> capture[0].tcp.field_names
+['srcport', 'dstport', 'port', 'stream', 'len', 'seq', 'seq_raw', 'nxtseq', 'ack', 'ack_raw', 'hdr_len', 'flags', 'flags_res', 'flags_ns', 'flags_cwr', 'flags_ecn', 'flags_urg', 'flags_ack', 'flags_push', 'flags_reset', 'flags_syn', 'flags_fin', 'flags_str', 'window_size_value', 'window_size', 'window_size_scalefactor', 'checksum', 'checksum_status', 'urgent_pointer', 'options', 'options_nop', 'option_kind', 'options_timestamp', 'option_len', 'options_timestamp_tsval', 'options_timestamp_tsecr', '', 'time_relative', 'time_delta']
+
+>>> capture[0].ip.field_names
+['version', 'hdr_len', 'dsfield', 'dsfield_dscp', 'dsfield_ecn', 'len', 'id', 'flags', 'flags_rb', 'flags_df', 'flags_mf', 'frag_offset', 'ttl', 'proto', 'checksum', 'checksum_status', 'src', 'addr', 'src_host', 'host', 'dst', 'dst_host']
+
+
+
+WHAT THE PACKET CONTAINS
+
+
+Layer ETH:
+        Destination: 1c:4d:70:68:cb:58
+        Address: 1c:4d:70:68:cb:58
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+        Source: 00:1e:a6:3a:b6:78
+        .... ..0. .... .... .... .... = LG bit: Globally unique address (factory default)
+        .... ...0 .... .... .... .... = IG bit: Individual address (unicast)
+        Type: IPv4 (0x0800)
+        Address: 00:1e:a6:3a:b6:78
+Layer IP:
+        0100 .... = Version: 4
+        .... 0101 = Header Length: 20 bytes (5)
+        Differentiated Services Field: 0x00 (DSCP: CS0, ECN: Not-ECT)
+        0000 00.. = Differentiated Services Codepoint: Default (0)
+        .... ..00 = Explicit Congestion Notification: Not ECN-Capable Transport (0)
+        Total Length: 52
+        Identification: 0x0000 (0)
+        Flags: 0x40, Don't fragment
+        0... .... = Reserved bit: Not set
+        .1.. .... = Don't fragment: Set
+        ..0. .... = More fragments: Not set
+        Fragment Offset: 0
+        Time to Live: 62
+        Protocol: TCP (6)
+        Header Checksum: 0x2bb1 [validation disabled]
+        Header checksum status: Unverified
+        Source Address: 142.250.192.10
+        Destination Address: 192.168.1.102
+Layer TCP:
+        Source Port: 443
+        Destination Port: 26654
+        Stream index: 0
+        TCP Segment Len: 0
+        Sequence Number: 1    (relative sequence number)
+        Sequence Number (raw): 2698175263
+        Next Sequence Number: 1    (relative sequence number)
+        Acknowledgment Number: 1    (relative ack number)
+        Acknowledgment number (raw): 4080155540
+        1000 .... = Header Length: 32 bytes (8)
+        Flags: 0x010 (ACK)
+        000. .... .... = Reserved: Not set
+        ...0 .... .... = Nonce: Not set
+        .... 0... .... = Congestion Window Reduced (CWR): Not set
+        .... .0.. .... = ECN-Echo: Not set
+        .... ..0. .... = Urgent: Not set
+        .... ...1 .... = Acknowledgment: Set
+        .... .... 0... = Push: Not set
+        .... .... .0.. = Reset: Not set
+        .... .... ..0. = Syn: Not set
+        .... .... ...0 = Fin: Not set
+        TCP Flags: ·······A····
+        Window: 276
+        Calculated window size: 276
+        Window size scaling factor: -1 (unknown)
+        Checksum: 0x0fdc [unverified]
+        Checksum Status: Unverified
+        Urgent Pointer: 0
+        Options: (12 bytes), No-Operation (NOP), No-Operation (NOP), Timestamps
+        TCP Option - No-Operation (NOP)
+        Kind: No-Operation (1)
+        TCP Option - Timestamps: TSval 305562517, TSecr 8692183
+        Length: 10
+        Timestamp value: 305562517
+        Timestamp echo reply: 8692183
+        Timestamps
+        Time since first frame in this TCP stream: 0.000000000 seconds
+        Time since previous frame in this TCP stream: 0.000000000 seconds
+        TCP Option - No-Operation (NOP)
+        Kind: No-Operation (1)
+        Kind: Time Stamp Option (8)
+
+
+WHAT NSL-KDD FEATURES CONTAIN
+
+
+@relation 'KDDTest'
+@attribute 'duration' real
+@attribute 'protocol_type' {'tcp','udp', 'icmp'} 
+@attribute 'service' {'aol', 'auth', 'bgp', 'courier', 'csnet_ns', 'ctf', 'daytime', 'discard', 'domain', 'domain_u', 'echo', 'eco_i', 'ecr_i', 'efs', 'exec', 'finger', 'ftp', 'ftp_data', 'gopher', 'harvest', 'hostnames', 'http', 'http_2784', 'http_443', 'http_8001', 'imap4', 'IRC', 'iso_tsap', 'klogin', 'kshell', 'ldap', 'link', 'login', 'mtp', 'name', 'netbios_dgm', 'netbios_ns', 'netbios_ssn', 'netstat', 'nnsp', 'nntp', 'ntp_u', 'other', 'pm_dump', 'pop_2', 'pop_3', 'printer', 'private', 'red_i', 'remote_job', 'rje', 'shell', 'smtp', 'sql_net', 'ssh', 'sunrpc', 'supdup', 'systat', 'telnet', 'tftp_u', 'tim_i', 'time', 'urh_i', 'urp_i', 'uucp', 'uucp_path', 'vmnet', 'whois', 'X11', 'Z39_50'} 
+@attribute 'flag' { 'OTH', 'REJ', 'RSTO', 'RSTOS0', 'RSTR', 'S0', 'S1', 'S2', 'S3', 'SF', 'SH' }
+@attribute 'src_bytes' real
+@attribute 'dst_bytes' real
+@attribute 'land' {'0', '1'}
+@attribute 'wrong_fragment' real
+@attribute 'urgent' real
+@attribute 'hot' real
+@attribute 'num_failed_logins' real
+@attribute 'logged_in' {'0', '1'}
+@attribute 'num_compromised' real
+@attribute 'root_shell' real
+@attribute 'su_attempted' real
+@attribute 'num_root' real
+@attribute 'num_file_creations' real
+@attribute 'num_shells' real
+@attribute 'num_access_files' real
+@attribute 'num_outbound_cmds' real
+@attribute 'is_host_login' {'0', '1'}
+@attribute 'is_guest_login' {'0', '1'}
+@attribute 'count' real
+@attribute 'srv_count' real
+@attribute 'serror_rate' real
+@attribute 'srv_serror_rate' real
+@attribute 'rerror_rate' real
+@attribute 'srv_rerror_rate' real
+@attribute 'same_srv_rate' real
+@attribute 'diff_srv_rate' real
+@attribute 'srv_diff_host_rate' real
+@attribute 'dst_host_count' real
+@attribute 'dst_host_srv_count' real
+@attribute 'dst_host_same_srv_rate' real
+@attribute 'dst_host_diff_srv_rate' real
+@attribute 'dst_host_same_src_port_rate' real
+@attribute 'dst_host_srv_diff_host_rate' real
+@attribute 'dst_host_serror_rate' real
+@attribute 'dst_host_srv_serror_rate' real
+@attribute 'dst_host_rerror_rate' real
+@attribute 'dst_host_srv_rerror_rate' real
+@attribute 'class' {'normal', 'anomaly'}
+
+
+
+
