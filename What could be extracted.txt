@@ -89,48 +89,58 @@ WHAT NSL-KDD FEATURES CONTAIN
 
 
 @relation 'KDDTest'
-@attribute 'duration' real
-@attribute 'protocol_type' {'tcp','udp', 'icmp'} 
-@attribute 'service' {'aol', 'auth', 'bgp', 'courier', 'csnet_ns', 'ctf', 'daytime', 'discard', 'domain', 'domain_u', 'echo', 'eco_i', 'ecr_i', 'efs', 'exec', 'finger', 'ftp', 'ftp_data', 'gopher', 'harvest', 'hostnames', 'http', 'http_2784', 'http_443', 'http_8001', 'imap4', 'IRC', 'iso_tsap', 'klogin', 'kshell', 'ldap', 'link', 'login', 'mtp', 'name', 'netbios_dgm', 'netbios_ns', 'netbios_ssn', 'netstat', 'nnsp', 'nntp', 'ntp_u', 'other', 'pm_dump', 'pop_2', 'pop_3', 'printer', 'private', 'red_i', 'remote_job', 'rje', 'shell', 'smtp', 'sql_net', 'ssh', 'sunrpc', 'supdup', 'systat', 'telnet', 'tftp_u', 'tim_i', 'time', 'urh_i', 'urp_i', 'uucp', 'uucp_path', 'vmnet', 'whois', 'X11', 'Z39_50'} 
-@attribute 'flag' { 'OTH', 'REJ', 'RSTO', 'RSTOS0', 'RSTR', 'S0', 'S1', 'S2', 'S3', 'SF', 'SH' }
-@attribute 'src_bytes' real
-@attribute 'dst_bytes' real
+@attribute 'duration' real  [not found]
+@attribute 'protocol_type' {'tcp','udp', 'icmp'}  [found]
+@attribute 'service' {'aol', 'auth', 'bgp', 'courier', 'csnet_ns', 'ctf', 'daytime', 'discard', 'domain', 'domain_u', 'echo', 'eco_i', 'ecr_i', 'efs', 'exec', 'finger', 'ftp', 'ftp_data', 'gopher', 'harvest', 'hostnames', 'http', 'http_2784', 'http_443', 'http_8001', 'imap4', 'IRC', 'iso_tsap', 'klogin', 'kshell', 'ldap', 'link', 'login', 'mtp', 'name', 'netbios_dgm', 'netbios_ns', 'netbios_ssn', 'netstat', 'nnsp', 'nntp', 'ntp_u', 'other', 'pm_dump', 'pop_2', 'pop_3', 'printer', 'private', 'red_i', 'remote_job', 'rje', 'shell', 'smtp', 'sql_net', 'ssh', 'sunrpc', 'supdup', 'systat', 'telnet', 'tftp_u', 'tim_i', 'time', 'urh_i', 'urp_i', 'uucp', 'uucp_path', 'vmnet', 'whois', 'X11', 'Z39_50'}  [not found]
+@attribute 'flag' { 'OTH', 'REJ', 'RSTO', 'RSTOS0', 'RSTR', 'S0', 'S1', 'S2', 'S3', 'SF', 'SH' }  [not found]
+@attribute 'src_bytes' real [not found]
+@attribute 'dst_bytes' real [not found]
 @attribute 'land' {'0', '1'}
-@attribute 'wrong_fragment' real
+@attribute 'wrong_fragment' real [not found]
 @attribute 'urgent' real
-@attribute 'hot' real
-@attribute 'num_failed_logins' real
-@attribute 'logged_in' {'0', '1'}
-@attribute 'num_compromised' real
-@attribute 'root_shell' real
-@attribute 'su_attempted' real
-@attribute 'num_root' real
-@attribute 'num_file_creations' real
-@attribute 'num_shells' real
-@attribute 'num_access_files' real
-@attribute 'num_outbound_cmds' real
-@attribute 'is_host_login' {'0', '1'}
-@attribute 'is_guest_login' {'0', '1'}
+@attribute 'hot' real [not found]
+@attribute 'num_failed_logins' real [not found]
+@attribute 'logged_in' {'0', '1'} [not found]
+@attribute 'num_compromised' real [not found]
+@attribute 'root_shell' real [not found]
+@attribute 'su_attempted' real [not found]
+@attribute 'num_root' real [not found]
+@attribute 'num_file_creations' real [not found]
+@attribute 'num_shells' real [not found]
+@attribute 'num_access_files' real [not found]
+@attribute 'num_outbound_cmds' real [not found]
+@attribute 'is_host_login' {'0', '1'} [not found]
+@attribute 'is_guest_login' {'0', '1'} [not found]
 @attribute 'count' real
 @attribute 'srv_count' real
-@attribute 'serror_rate' real
-@attribute 'srv_serror_rate' real
-@attribute 'rerror_rate' real
-@attribute 'srv_rerror_rate' real
-@attribute 'same_srv_rate' real
-@attribute 'diff_srv_rate' real
-@attribute 'srv_diff_host_rate' real
+@attribute 'serror_rate' real [not found]
+@attribute 'srv_serror_rate' real [not found]
+@attribute 'rerror_rate' real [not found]
+@attribute 'srv_rerror_rate' real [not found]
+@attribute 'same_srv_rate' real [not found]
+@attribute 'diff_srv_rate' real [not found]
+@attribute 'srv_diff_host_rate' real [not found]
 @attribute 'dst_host_count' real
 @attribute 'dst_host_srv_count' real
-@attribute 'dst_host_same_srv_rate' real
-@attribute 'dst_host_diff_srv_rate' real
-@attribute 'dst_host_same_src_port_rate' real
-@attribute 'dst_host_srv_diff_host_rate' real
-@attribute 'dst_host_serror_rate' real
-@attribute 'dst_host_srv_serror_rate' real
-@attribute 'dst_host_rerror_rate' real
-@attribute 'dst_host_srv_rerror_rate' real
+@attribute 'dst_host_same_srv_rate' real [not found]
+@attribute 'dst_host_diff_srv_rate' real [not found]
+@attribute 'dst_host_same_src_port_rate' real [not found]
+@attribute 'dst_host_srv_diff_host_rate' real [not found]
+@attribute 'dst_host_serror_rate' real [not found]
+@attribute 'dst_host_srv_serror_rate' real [not found]
+@attribute 'dst_host_rerror_rate' real [not found]
+@attribute 'dst_host_srv_rerror_rate' real [not found]
 @attribute 'class' {'normal', 'anomaly'}
+COMMON
+
+layer ip.protocol
+land
+urgent
+count 
+srv count
+dst_host_count [doubtful]
+Dst_host_srv_count
+
 
 
 
