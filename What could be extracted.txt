@@ -133,6 +133,10 @@ WHAT NSL-KDD FEATURES CONTAIN
 @attribute 'class' {'normal', 'anomaly'}
 COMMON
 
+-----------------------------------------------------------------------------------------------------------------
+8 FEATURES
+_______________________________________________________________________________________________________________________
+
 layer ip.protocol
 land
 urgent
@@ -141,6 +145,50 @@ srv count
 dst_host_count [doubtful]
 Dst_host_srv_count
 
+---------------------------------------------------------------------------------------------------------------------------
+
+	• There are 41 features in this dataset.
+	1. Duration-Duration of the connection :0
+	2. Protocol-type-Protocol used in the connection: tcp
+	3. Service- Destination network service used: ftp_data
+	4. Flag-Status of connection normal or error: SF
+	5. Src_bytes- Number of data bytes transferred from source to destination in single connection
+	6. Dst_bytes- Number of data bytes transferred from destination to source in single connection
+	7. Land-if source, destination ip address and port is same, then it take 0 value
+	8. Wrong_fragment- Total number of wrong fragment in the connection
+	9. Urgent- Number of urgent packets in the connection, the have urgent bit activated
+	10. Hot-
+	11. Num_failed_login-count of failed login attempts
+	12. Logged_in: login status
+	13. Num_compromised: number of compromised conditions
+	14. Root-shell: 1 if root_shell is obtained
+	15. Su-attempted: 1 if 'su root' command attempted
+	16. Num_root- num of 'root' access
+	17. Num_file_creationa: number of file creation operation in the connection
+	18. Num_shell: number of shell prompt
+	19. Num_access_files: number of operation on access control files
+	20. Num_outboudn_cmds- Number of outbounds commands in an ftp session
+	21. Is_hot_login: 1 if login belongs to hot list i.e root or admin
+	22. Is_guest_login: 1 if login belongs to guest
+	23. Count- Number of connection to  the same destination host as the  current connection  in the past twosecond.
+	24. Srv_Count- Number of connection to  the same service(port number) as the  current connection  in the past twosecond.
+	25.  Serror_rate- the percentage of connection that have activated the flag(4) s0,s1,s2,s3 among the connections aggregated  on count(23).
+	26. Srv_Serror_rate- the percentage of connection that have activated the flag(4) s0,s1,s2,s3 among the connections aggregated  on srv_count(24).
+	27. Rerror_rate- the percentage of connection that have activated the flag(4) REJ among the connections aggregated  on count(23).
+	28. Srv_Rerror_rate- the percentage of connection that have activated the flag(4) REJ among the connections aggregated  on srv_count(24).
+	29. Same_srv_rate-the percentage of connection that were to the same service, among the connections aggregated  on count(23).
+	30. diff_srv_rate-the percentage of connection that were to the different service, among the connections aggregated  on count(23).
+	31. Srv_diff_host_rate--the percentage of connection that were to the different service, among the connections aggregated  on srv_count(24).
+	32. Dst_host_count-number of connection having the same destination Ip address.
+	33. Dst_host_srv_count-number of connection having the same port number.
+	34. Dst_host_same_srv_count-the percentage of connection that were to the same service, among the connectionaggregated in dst_host_count(32)
+	35. Dst_host_diff_srv_count-the percentage of connection that were to the diffrent service, among the connectionaggregated in dst_host_count(32)
+	36. Dst_host_same_srv_port_rate-the percentage of connection that were to the same source port, among the connection aggregated in dst_host_srv_count(33)
+	37. Dst_host_diff_srv_port_rate-the percentage of connection that were to the different destination machines, among the connection aggregated in dst_host_srv_count(33)
+	38. Dst_host_serror_rate-the percentage of connections that have activated  the flag(4) s0,s(1),s(2) and s(3), among the connections aggregated  in dst_host_count(32)
+	39. Dst_host_srv_serror_rate - the percent  of connections that have activated the flag(4) s0,s(1),s(2) and s(3), among the connections aggregated  indst_host_srv_count(33).
+	40. Dst_host_rerror_rate- the percentage of connection that have activated the flag(4) REJ among the connections aggregated  in dst_host_count(32)
+	41. Dst_host_srv_rerror_rate- the percentage of connection that have activated the flag(4) REJ among the connections aggregated  in dst_host_srv_count(33)
 
 
 
