@@ -1,7 +1,7 @@
 import pyshark
 import pandas as pd
 import pickle
-from py import _std
+""" from py import _std
 from py import __metainfo
 from py import _builtin
 from py import _error
@@ -13,7 +13,7 @@ from py import _log
 from py import _path
 from py import _process
 from py import _path
-from py import _vendored_packages
+from py import _vendored_packages """
 
 # Capturing Packets
 capture = pyshark.LiveCapture(interface='Wi-Fi')
