@@ -30,7 +30,12 @@ if len(capture)!=0:
         data.append(list())
         try:
             val=capture[x].ip.proto
-            data[x].append(int(val))
+            if val=='6':
+                data[x].append(1)
+            elif val=='17':
+                data[x].append(2)
+            else:
+                data[x].append(3)
         except:
             data[x].append(0)
 
@@ -122,7 +127,7 @@ if len(capture)!=0:
     
     df = pd.DataFrame(data)
     # df.to_csv('live.csv', index=False, header=False)    This was for csv
-
+    print(df)
     clf= pickle.load(open('finalized_model.sav', 'rb'))
     x=df.iloc[:,:].values
     result = clf.predict(x)
