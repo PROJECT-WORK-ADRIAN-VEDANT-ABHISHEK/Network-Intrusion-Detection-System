@@ -1,0 +1,16 @@
+ Normal=1 and Anomaly=0 Packet 1 Predicted 0
+Packet 2 Predicted 1
+Packet 3 Predicted 0
+Packet 4 Predicted 1
+Packet 5 Predicted 0
+Packet 6 Predicted 1
+Packet 7 Predicted 0
+Packet 8 Predicted 1
+Packet 9 Predicted 0
+Packet 10 Predicted 1
+Packet 11 Predicted 0
+Packet 12 Predicted 1
+Packet 13 Predicted 0
+Packet 14 Predicted 1
+Packet 15 Predicted 0
+Packet 16 Predicted 1
