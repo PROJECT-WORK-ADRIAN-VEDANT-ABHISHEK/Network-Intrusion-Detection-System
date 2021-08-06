@@ -1,16 +1,34 @@
- Normal=1 and Anomaly=0 Packet 1 Predicted 0
-Packet 2 Predicted 1
-Packet 3 Predicted 0
-Packet 4 Predicted 1
-Packet 5 Predicted 0
-Packet 6 Predicted 1
-Packet 7 Predicted 0
-Packet 8 Predicted 1
-Packet 9 Predicted 0
-Packet 10 Predicted 1
-Packet 11 Predicted 0
-Packet 12 Predicted 1
-Packet 13 Predicted 0
-Packet 14 Predicted 1
-Packet 15 Predicted 0
-Packet 16 Predicted 1
+ Normal=1 and Anomaly=0 
+ COLLUMNS 
+ protocol land urgent count srv count dst_host_count Dst_host_srv_count 
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 1 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 2 Predicted 1
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 3 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 4 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 5 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 6 Predicted 1
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 7 Predicted 0
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 8 Predicted 0
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 9 Predicted 0
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 10 Predicted 0
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 11 Predicted 0
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 12 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 13 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 14 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 15 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 16 Predicted 1
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 17 Predicted 0
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 18 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 19 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 20 Predicted 1
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 21 Predicted 0
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 22 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 23 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 24 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 25 Predicted 1
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 26 Predicted 0
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 27 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 28 Predicted 1
+data:-[6, 1, 0, 16, 16, 16, 16]Packet:- 29 Predicted 1
+data:-[6, 1, 0, 15, 7, 15, 7]Packet:- 30 Predicted 0
+data:-[6, 1, 0, 15, 8, 15, 8]Packet:- 31 Predicted 0

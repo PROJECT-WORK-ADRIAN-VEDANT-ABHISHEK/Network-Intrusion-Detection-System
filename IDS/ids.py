@@ -129,9 +129,11 @@ if len(capture)!=0:
     
     num=1
     textfile = open("a_file.txt", "w")
-    textfile.write(" Normal=1 and Anomaly=0 ")
+    textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
+    textfile.write(" COLLUMNS " + "\n" )
+    textfile.write(" protocol land urgent count srv count dst_host_count Dst_host_srv_count " + "\n" )
     for element in result:
-        textfile.write("Packet "+ str(num) + " Predicted "+ str(element) + "\n")
+        textfile.write("data:-"+str(data[num-1]) +"Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
         num=num+1
     textfile.close()
 
