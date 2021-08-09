@@ -1,0 +1,103 @@
+ Normal=1 and Anomaly=0 
+ Packets found are 160 
+ Anomaly found are 10 
+Packet:- 81 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -33
+srv_count -5
+dst_host_count -5
+Dst_host_srv_count -5
+
+
+Packet:- 82 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -33
+srv_count -5
+dst_host_count -5
+Dst_host_srv_count -5
+
+
+Packet:- 84 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -127
+srv_count -5
+dst_host_count -127
+Dst_host_srv_count -5
+
+
+Packet:- 85 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -127
+srv_count -5
+dst_host_count -127
+Dst_host_srv_count -5
+
+
+Packet:- 87 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -33
+srv_count -5
+dst_host_count -5
+Dst_host_srv_count -5
+
+
+Packet:- 103 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -127
+srv_count -5
+dst_host_count -127
+Dst_host_srv_count -5
+
+
+Packet:- 104 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -33
+srv_count -5
+dst_host_count -5
+Dst_host_srv_count -5
+
+
+Packet:- 105 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -127
+srv_count -5
+dst_host_count -127
+Dst_host_srv_count -5
+
+
+Packet:- 107 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -33
+srv_count -5
+dst_host_count -5
+Dst_host_srv_count -5
+
+
+Packet:- 108 Predicted 0
+protocol -2
+land -1
+urgent -0
+count -127
+srv_count -5
+dst_host_count -127
+Dst_host_srv_count -5
+
+

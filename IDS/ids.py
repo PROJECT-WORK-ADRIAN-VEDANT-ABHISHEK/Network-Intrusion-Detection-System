@@ -16,7 +16,7 @@ from py import _path
 from py import _vendored_packages """
 
 # Capturing Packets
-capture = pyshark.LiveCapture(interface='Wi-Fi')
+capture = pyshark.LiveCapture(interface='Wi-Fi',output_file='packetsaved.pcap')
 capture.sniff(timeout=2)
 
 data=[]
@@ -92,18 +92,11 @@ if len(capture)!=0:
         # Appending dst_host_count
         z=0
         for y in range(len(capture)):
-            if val=='6':
-                try:    
-                    if capture[x].ip.dst_host==capture[y].ip.dst_host:
-                        z=z+1
-                except:
-                    continue
-            elif val=='17':
-                try:
-                    if capture[x].udp.dst_host==capture[y].udp.dst_host:
-                        z=z+1
-                except:
-                    continue
+            try:    
+                if capture[x].ip.dst_host==capture[y].ip.dst_host:
+                    z=z+1
+            except:
+                continue
         data[x].append(z)
 
         # Appending host_srv_count    IT IS THE SAME CODE AS THE SRV_COUNT BECAUSE I DON'T UNDERSTAND THE DIFF BETWEEN THEM
@@ -131,19 +124,36 @@ if len(capture)!=0:
     clf= pickle.load(open('finalized_model.sav', 'rb'))
     x=df.iloc[:,:].values
     result = clf.predict(x)
-    
+    nor=[]
+    ano=[]
+    nor=[1 for x in result if x==1]
+    ano=[1 for x in result if x==0]
+    print("result-----",result)
+    print("ano-----",ano)
     num=1
-    textfile = open("a_file.txt", "w")
+    textfile = open("Anomaly.txt", "w")
     textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
-    textfile.write(" COLLUMNS " + "\n" )
-    textfile.write(" protocol land urgent count srv count dst_host_count Dst_host_srv_count " + "\n" )
+    textfile.write(" Packets found are {} ".format(len(capture)))
+    textfile.write("\n")
+    textfile.write(" Anomaly found are {} ".format(sum(ano)))
+    textfile.write("\n")
+    
     for element in result:
-        textfile.write("data:-"+str(data[num-1]) +"Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+        if element==0:
+            textfile.write("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+            textfile.write("protocol -" +str(data[num-1][0])+ "\n")
+            textfile.write("land -" +str(data[num-1][1])+ "\n")
+            textfile.write("urgent -" +str(data[num-1][2])+ "\n")
+            textfile.write("count -" +str(data[num-1][3])+ "\n")
+            textfile.write("srv_count -" +str(data[num-1][4])+ "\n")
+            textfile.write("dst_host_count -" +str(data[num-1][5])+ "\n")
+            textfile.write("Dst_host_srv_count -" +str(data[num-1][6])+ "\n")
+            textfile.write("\n"+ "\n")
         num=num+1
     textfile.close()
 
 else:
     print(" No Packets Captured")
 
-
+#str(data[num-1])
 
