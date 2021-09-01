@@ -1,19 +1,7 @@
 import pyshark
 import pandas as pd
 import pickle
-""" from py import _std
-from py import __metainfo
-from py import _builtin
-from py import _error
-from py import _xmlgen
-from py import __pycache__
-from py import _code
-from py import _io
-from py import _log
-from py import _path
-from py import _process
-from py import _path
-from py import _vendored_packages """
+from getmac import get_mac_address as gma
 
 # Capturing Packets
 capture = pyshark.LiveCapture(interface='Wi-Fi',output_file='packetsaved.pcap')
@@ -128,10 +116,11 @@ if len(capture)!=0:
     ano=[]
     nor=[1 for x in result if x==1]
     ano=[1 for x in result if x==0]
-    print("result-----",result)
-    print("ano-----",ano)
+    
     num=1
     textfile = open("Anomaly.txt", "w")
+    textfile.write(" MAC Address of the device is :  {} ".format(gma()))
+    textfile.write("\n")
     textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
     textfile.write(" Packets found are {} ".format(len(capture)))
     textfile.write("\n")
@@ -155,5 +144,5 @@ if len(capture)!=0:
 else:
     print(" No Packets Captured")
 
-#str(data[num-1])
+
 
