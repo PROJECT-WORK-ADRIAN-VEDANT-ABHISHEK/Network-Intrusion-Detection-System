@@ -103,6 +103,14 @@ if len(capture)!=0:
                 except:
                     continue      
         data[x].append(z)
+
+        # Append host mac
+
+        data[x].append(capture[x].eth.dst)
+
+        # Append dest mac
+
+        data[x].append(capture[x].eth.src)
     
     # Converting to datafram
     
@@ -110,7 +118,7 @@ if len(capture)!=0:
     # df.to_csv('live.csv', index=False, header=False)    This was for csv
     print(df)
     clf= pickle.load(open('finalized_model.sav', 'rb'))
-    x=df.iloc[:,:].values
+    x=df.iloc[:,:-2].values
     result = clf.predict(x)
     nor=[]
     ano=[]
@@ -119,12 +127,14 @@ if len(capture)!=0:
     
     num=1
     textfile = open("Anomaly.txt", "w")
-    textfile.write(" MAC Address of the device is :  {} ".format(gma()))
+    textfile.write(" MAC Address of this device is :  {} ".format(gma()))
     textfile.write("\n")
     textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
+    textfile.write("\n")
     textfile.write(" Packets found are {} ".format(len(capture)))
     textfile.write("\n")
     textfile.write(" Anomaly found are {} ".format(sum(ano)))
+    textfile.write("\n")
     textfile.write("\n")
     
     for element in result:
@@ -137,6 +147,8 @@ if len(capture)!=0:
             textfile.write("srv_count -" +str(data[num-1][4])+ "\n")
             textfile.write("dst_host_count -" +str(data[num-1][5])+ "\n")
             textfile.write("Dst_host_srv_count -" +str(data[num-1][6])+ "\n")
+            textfile.write("Dst MAC Address -" +str(data[num-1][7])+ "\n")
+            textfile.write("SRC Mac Address -" +str(data[num-1][8])+ "\n")
             textfile.write("\n"+ "\n")
         num=num+1
     textfile.close()

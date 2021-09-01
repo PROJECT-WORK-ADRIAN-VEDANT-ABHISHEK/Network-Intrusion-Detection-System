@@ -1,7 +1,9 @@
- MAC Address of the device is :  1c:4d:70:68:cb:58 
+ MAC Address of this device is :  1c:4d:70:68:cb:58 
  Normal=1 and Anomaly=0 
- Packets found are 4 
+
+ Packets found are 6 
  Anomaly found are 3 
+
 Packet:- 1 Predicted 0
 protocol -1
 land -1
@@ -10,16 +12,8 @@ count -3
 srv_count -1
 dst_host_count -3
 Dst_host_srv_count -1
-
-
-Packet:- 2 Predicted 0
-protocol -1
-land -1
-urgent -0
-count -3
-srv_count -1
-dst_host_count -3
-Dst_host_srv_count -1
+Dst MAC Address -1c:4d:70:68:cb:58
+SRC Mac Address -00:1e:a6:3a:b6:78
 
 
 Packet:- 3 Predicted 0
@@ -30,5 +24,19 @@ count -3
 srv_count -1
 dst_host_count -3
 Dst_host_srv_count -1
+Dst MAC Address -1c:4d:70:68:cb:58
+SRC Mac Address -00:1e:a6:3a:b6:78
+
+
+Packet:- 5 Predicted 0
+protocol -1
+land -1
+urgent -0
+count -3
+srv_count -1
+dst_host_count -3
+Dst_host_srv_count -1
+Dst MAC Address -1c:4d:70:68:cb:58
+SRC Mac Address -00:1e:a6:3a:b6:78
 
 
