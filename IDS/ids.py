@@ -129,7 +129,7 @@ if len(capture)!=0:
     textfile = open("Anomaly.txt", "w")
     textfile.write(" MAC Address of this device is :  {} ".format(gma()))
     textfile.write("\n")
-    textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
+    #textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
     textfile.write("\n")
     textfile.write(" Packets found are {} ".format(len(capture)))
     textfile.write("\n")
@@ -137,9 +137,13 @@ if len(capture)!=0:
     textfile.write("\n")
     textfile.write("\n")
     
+    found_anomanly_src=[]
     for element in result:
-        if element==0:
-            textfile.write("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+        if element==0 and data[num-1][8] not in found_anomanly_src:
+
+            found_anomanly_src.append(data[num-1][8])
+
+            #textfile.write("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
             textfile.write("protocol -" +str(data[num-1][0])+ "\n")
             textfile.write("land -" +str(data[num-1][1])+ "\n")
             textfile.write("urgent -" +str(data[num-1][2])+ "\n")
