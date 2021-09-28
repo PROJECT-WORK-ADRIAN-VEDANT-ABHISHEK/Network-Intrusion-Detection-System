@@ -1,6 +1,7 @@
 import pyshark
 import pandas as pd
 import pickle
+#from requests import get
 from getmac import get_mac_address as gma
 
 # Capturing Packets
@@ -106,17 +107,17 @@ if len(capture)!=0:
 
         # Append host mac
 
-        data[x].append(capture[x].eth.dst)
+        data[x].append(capture[x].ip.src)
 
         # Append dest mac
 
-        data[x].append(capture[x].eth.src)
+        data[x].append(capture[x].ip.dst)
     
     # Converting to datafram
     
     df = pd.DataFrame(data)
     # df.to_csv('live.csv', index=False, header=False)    This was for csv
-    print(df)
+    #print(df)
     clf= pickle.load(open('finalized_model.sav', 'rb'))
     x=df.iloc[:,:-2].values
     result = clf.predict(x)
@@ -124,11 +125,15 @@ if len(capture)!=0:
     ano=[]
     nor=[1 for x in result if x==1]
     ano=[1 for x in result if x==0]
-    
+
+    ##ip = get('https://api.ipify.org').text
+
     num=1
     textfile = open("Anomaly.txt", "w")
     textfile.write(" MAC Address of this device is :  {} ".format(gma()))
     textfile.write("\n")
+   # textfile.write(" IP Address of this device is :  {} ".format(ip))
+    #textfile.write("\n")
     #textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
     textfile.write("\n")
     textfile.write(" Packets found are {} ".format(len(capture)))
@@ -151,14 +156,16 @@ if len(capture)!=0:
             textfile.write("srv_count -" +str(data[num-1][4])+ "\n")
             textfile.write("dst_host_count -" +str(data[num-1][5])+ "\n")
             textfile.write("Dst_host_srv_count -" +str(data[num-1][6])+ "\n")
-            textfile.write("Dst MAC Address -" +str(data[num-1][7])+ "\n")
-            textfile.write("SRC Mac Address -" +str(data[num-1][8])+ "\n")
+            textfile.write("Dst IP Address -" +str(data[num-1][7])+ "\n")
+            textfile.write("SRC IP Address -" +str(data[num-1][8])+ "\n")
             textfile.write("\n"+ "\n")
         num=num+1
     textfile.close()
 
 else:
     print(" No Packets Captured")
+
+print(" DONE ")
 
 
 
