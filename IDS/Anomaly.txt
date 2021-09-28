@@ -1,7 +1,8 @@
  MAC Address of this device is :  1c:4d:70:68:cb:58 
+ IP Address of this device is :  192.168.1.103 
 
- Packets found are 6 
- Anomaly found are 4 
+ Packets found are 8 
+ Anomaly found are 7 
 
 protocol -1
 land -1
@@ -10,7 +11,18 @@ count -4
 srv_count -3
 dst_host_count -4
 Dst_host_srv_count -3
-Dst IP Address -172.66.41.9
+Dst IP Address -40.77.226.250
 SRC IP Address -192.168.1.103
+
+
+protocol -1
+land -1
+urgent -0
+count -3
+srv_count -3
+dst_host_count -3
+Dst_host_srv_count -3
+Dst IP Address -192.168.1.103
+SRC IP Address -40.77.226.250
 
 

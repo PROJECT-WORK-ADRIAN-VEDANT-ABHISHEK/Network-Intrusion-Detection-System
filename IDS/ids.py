@@ -1,7 +1,7 @@
 import pyshark
 import pandas as pd
 import pickle
-#from requests import get
+import socket
 from getmac import get_mac_address as gma
 
 # Capturing Packets
@@ -126,14 +126,17 @@ if len(capture)!=0:
     nor=[1 for x in result if x==1]
     ano=[1 for x in result if x==0]
 
-    ##ip = get('https://api.ipify.org').text
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(("8.8.8.8", 80))
+
 
     num=1
     textfile = open("Anomaly.txt", "w")
     textfile.write(" MAC Address of this device is :  {} ".format(gma()))
     textfile.write("\n")
-   # textfile.write(" IP Address of this device is :  {} ".format(ip))
-    #textfile.write("\n")
+    textfile.write(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
+    s.close()
+    textfile.write("\n")
     #textfile.write(" Normal=1 and Anomaly=0 " + "\n" )
     textfile.write("\n")
     textfile.write(" Packets found are {} ".format(len(capture)))
