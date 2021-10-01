@@ -1,50 +1,61 @@
  MAC Address of this device is :  1c:4d:70:68:cb:58 
  IP Address of this device is :  192.168.1.103 
 
- Packets found are 62 
- Anomaly found are 13 
+ Packets found are 35 
+ Anomaly found are 29 
 
-protocol -2
+protocol -1
 land -1
 urgent -0
-count -39
-srv_count -4
-dst_host_count -4
-Dst_host_srv_count -4
+count -18
+srv_count -17
+dst_host_count -13
+Dst_host_srv_count -17
 Dst IP Address -192.168.1.103
-SRC IP Address -182.48.200.5
+SRC IP Address -40.77.226.250
 
 
 protocol -1
 land -1
 urgent -0
-count -39
-srv_count -6
-dst_host_count -5
-Dst_host_srv_count -6
-Dst IP Address -192.168.1.103
-SRC IP Address -209.58.175.20
-
-
-protocol -1
-land -1
-urgent -0
-count -23
-srv_count -3
-dst_host_count -23
-Dst_host_srv_count -3
-Dst IP Address -209.58.175.20
+count -17
+srv_count -8
+dst_host_count -17
+Dst_host_srv_count -8
+Dst IP Address -40.77.226.250
 SRC IP Address -192.168.1.103
 
 
 protocol -1
 land -1
 urgent -0
-count -39
-srv_count -6
+count -18
+srv_count -17
 dst_host_count -1
-Dst_host_srv_count -6
+Dst_host_srv_count -17
 Dst IP Address -192.168.1.103
-SRC IP Address -151.101.65.69
+SRC IP Address -23.50.246.69
+
+
+protocol -1
+land -1
+urgent -0
+count -18
+srv_count -17
+dst_host_count -2
+Dst_host_srv_count -17
+Dst IP Address -192.168.1.103
+SRC IP Address -23.57.196.109
+
+
+protocol -1
+land -1
+urgent -0
+count -18
+srv_count -17
+dst_host_count -1
+Dst_host_srv_count -17
+Dst IP Address -192.168.1.103
+SRC IP Address -104.16.68.69
 
 

@@ -5,5 +5,3 @@ import pyshark
 capture = pyshark.LiveCapture(interface='Wi-Fi')
 capture.sniff(timeout=2)
 print(capture)
-
-capture[0]
