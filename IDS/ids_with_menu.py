@@ -159,7 +159,7 @@ def packet_capture():
 
                 found_anomanly_src.append(data[num-1][8])
 
-                #textfile.write("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+                textfile.write("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
                 textfile.write("protocol -" +str(data[num-1][0])+ "\n")
                 textfile.write("land -" +str(data[num-1][1])+ "\n")
                 textfile.write("urgent -" +str(data[num-1][2])+ "\n")
