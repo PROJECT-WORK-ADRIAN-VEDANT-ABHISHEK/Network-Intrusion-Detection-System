@@ -6,7 +6,7 @@ from getmac import get_mac_address as gma
 
 # Capturing Packets
 capture = pyshark.LiveCapture(interface='Wi-Fi',output_file='packetsaved.pcap')
-capture.sniff(timeout=2)
+capture.sniff(timeout=5)
 
 data=[]
 print(capture)
