@@ -17,7 +17,7 @@ from py import _vendored_packages """
 
 # Capturing Packets
 capture = pyshark.LiveCapture(interface='Wi-Fi',output_file='packetsaved.pcap')
-capture.sniff(timeout=2)
+capture.sniff(timeout=5)
 
 data=[]
 print(capture)
