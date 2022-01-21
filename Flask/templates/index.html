@@ -7,11 +7,17 @@
     <title>Interface Selection</title>
 </head>
 <body>
-    <select name=interfaces method="POST" action="/selection">
-        {% for interface in interface_list %}
-        <option value= "{{interface}}" SELECTED>{{interface}}</option>"
-        {% endfor %}
-    </select>
-    <button type="submit"  >SUBMIT</button>
+    <form class="form-inline" method="post">
+      <div class="form-group">
+        <div class="input-group">
+            <select name="interfaces" method="POST" action="/selection">
+                {% for interface in interface_list %}
+                <option value= "{{interface}}" SELECTED>{{interface}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit"  >SUBMIT</button>
+      </div>
+    </form>
 </body>
 </html>
