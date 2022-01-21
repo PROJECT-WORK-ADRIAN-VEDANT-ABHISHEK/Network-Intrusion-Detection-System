@@ -193,7 +193,7 @@ print("-------------------- WELCOME TO REAL TIME INTRUSION DETECTION SYSTEM-----
 while looping:
     
     print(" ")
-    print(" What wwould you like to do")
+    print(" What would you like to do")
     print(" 1. Check for Anomaly")
     print(" 2. Check the Captured Packets")
     print(" 3. Exit ")
