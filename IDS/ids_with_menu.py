@@ -17,6 +17,7 @@ def packet_capture():
     capture.sniff(timeout=2)
 
     data=[]
+    print("This is it.")
     print(capture)
 
     # Creating List
