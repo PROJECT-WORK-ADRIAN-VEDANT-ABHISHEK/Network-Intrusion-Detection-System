@@ -138,7 +138,38 @@ def interface_option():
             nor=[1 for x in result if x==1]
             ano=[1 for x in result if x==0]
 
-            return jsonify(data)
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            s.connect(("8.8.8.8", 80))
+            textnote=[]
+
+            num=1
+        
+            textnote.append(" MAC Address of this device is :  {} ".format(gma()))
+            textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
+            s.close()
+            
+            textnote.append(" Packets found are {} ".format(len(capture)))
+            textnote.append(" Anomaly found are {} ".format(sum(ano)))
+            
+            found_anomanly_src=[]
+            for element in result:
+                if element==0 and data[num-1][8] not in found_anomanly_src:
+
+                    found_anomanly_src.append(data[num-1][8])
+
+                    #textnote.append("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+                    textnote.append("protocol -" +str(data[num-1][0]))
+                    textnote.append("land -" +str(data[num-1][1]))
+                    textnote.append("urgent -" +str(data[num-1][2]))
+                    textnote.append("count -" +str(data[num-1][3]))
+                    textnote.append("srv_count -" +str(data[num-1][4]))
+                    textnote.append("dst_host_count -" +str(data[num-1][5]))
+                    textnote.append("Dst_host_srv_count -" +str(data[num-1][6]))
+                    textnote.append("Dst IP Address -" +str(data[num-1][7]))
+                    textnote.append("SRC IP Address -" +str(data[num-1][8]))
+                    textnote.append("    ")
+                num=num+1
+            return jsonify(textnote)
             
         
 if __name__== "__main__":
