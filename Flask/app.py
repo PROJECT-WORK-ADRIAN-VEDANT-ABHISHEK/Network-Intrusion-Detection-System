@@ -5,8 +5,20 @@ import pandas as pd
 import pickle
 import socket
 from getmac import get_mac_address as gma
+from user.models import User
+
 
 app = Flask(__name__)
+#from user import routes
+
+
+@app.route('/user/signup', methods=['GET'])
+def signup():
+    return User().signup()
+
+@app.route('/dashboard/')
+def dashboard():
+    return render_template('dashboard.html')
 
 @app.route('/',methods=["POST","GET"])
 def interface_option():
