@@ -5,16 +5,50 @@ import pandas as pd
 import pickle
 import socket
 from getmac import get_mac_address as gma
-from user.models import User
+#from user.models import User
+import pymongo
+import uuid
+from passlib.hash import pbkdf2_sha256
+#from user.models import User
 
 
 app = Flask(__name__)
-#from user import routes
 
+#database
+client = pymongo.MongoClient('127.0.0.1', 27017)
+db = client.user_login_system
 
-@app.route('/user/signup', methods=['GET'])
+class User:
+
+    def signup(self):
+        #print(request.form)
+
+        #Create user object
+        user = {
+            "_id":uuid.uuid4().hex,
+            "name": request.form.get('name'),
+            "email":request.form.get('email'),
+            "password":request.form.get('password')
+        }
+
+        # Encrypt the password
+        user['password'] = pbkdf2_sha256.encrypt(user['password'])
+
+        db.users.insert_one(user)
+
+        return jsonify(user), 200
+
+@app.route('/user/signup', methods=['POST'])
 def signup():
     return User().signup()
+
+@app.route('/home/')
+def home():
+    return render_template('home.html')
+
+#@app.route('/user/signup', methods=['POST'])
+#def signup():
+#    return User().signup()
 
 @app.route('/dashboard/')
 def dashboard():
