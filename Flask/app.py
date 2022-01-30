@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify
+from flask import Flask, render_template, redirect, url_for, request, jsonify, session, redirect
+from functools import wraps
 import psutil
 import pyshark
 import pandas as pd
@@ -13,12 +14,29 @@ from passlib.hash import pbkdf2_sha256
 
 
 app = Flask(__name__)
+app.secret_key= b'\r\xb2XX\x1d\xd3\x0b\xe2\x9b\xe9\x05\xc8ln\xa1$'
 
 #database
 client = pymongo.MongoClient('127.0.0.1', 27017)
 db = client.user_login_system
 
+#decorators
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            return redirect('/')
+    return wrap
+
 class User:
+
+    def start_session(self, user):
+        del user['password']
+        session['logged_in'] = True
+        session['user']  = user
+        return jsonify(user), 200
 
     def signup(self):
         #print(request.form)
@@ -34,15 +52,28 @@ class User:
         # Encrypt the password
         user['password'] = pbkdf2_sha256.encrypt(user['password'])
 
-        db.users.insert_one(user)
+        #check for existing email
+        if db.users.find_one({"email": user['email']}):
+            return jsonify({"error": "Email address already in use"}),400
 
-        return jsonify(user), 200
+        if db.users.insert_one(user):
+           return self.start_session(user) 
+
+        return jsonify({"error": "Signup failed"}), 400
+
+    def signout(self):
+        session.clear()
+        return redirect('/')
 
 @app.route('/user/signup', methods=['POST'])
 def signup():
     return User().signup()
 
-@app.route('/home/')
+@app.route('/user/signout')
+def signout():
+    return User().signout()
+
+@app.route('/')
 def home():
     return render_template('home.html')
 
@@ -50,11 +81,8 @@ def home():
 #def signup():
 #    return User().signup()
 
-@app.route('/dashboard/')
-def dashboard():
-    return render_template('dashboard.html')
-
-@app.route('/',methods=["POST","GET"])
+@app.route('/dashboard/',methods=["POST","GET"])
+@login_required
 def interface_option():
     val1=" "
     interface_list=[]
@@ -63,7 +91,7 @@ def interface_option():
         interface_list.append(x)
     
     if request.method=="GET":
-        return render_template("index.html", interface_list=interface_list)
+        return render_template("dashboard.html", interface_list=interface_list)
     else:
         selec =request.form.get('interfaces')
         capture = pyshark.LiveCapture(interface=selec)
