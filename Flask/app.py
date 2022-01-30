@@ -65,6 +65,14 @@ class User:
         session.clear()
         return redirect('/')
 
+    def login(self):
+        user = db.users.find_one({
+            "email": request.form.get('email')
+            })
+        if user and pbkdf2_sha256.verify(request.form.get('password'), user['password']):
+            return self.start_session(user)
+        return jsonify({"error": "Invalid login credentials"}), 401
+
 @app.route('/user/signup', methods=['POST'])
 def signup():
     return User().signup()
@@ -72,6 +80,10 @@ def signup():
 @app.route('/user/signout')
 def signout():
     return User().signout()
+
+@app.route('/user/login', methods=['POST'])
+def login():
+    return User().login()
 
 @app.route('/')
 def home():
