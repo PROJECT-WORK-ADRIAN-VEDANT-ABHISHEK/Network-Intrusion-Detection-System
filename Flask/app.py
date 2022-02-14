@@ -46,7 +46,8 @@ class User:
             "_id":uuid.uuid4().hex,
             "name": request.form.get('name'),
             "email":request.form.get('email'),
-            "password":request.form.get('password')
+            "password":request.form.get('password'),
+            "history":""
         }
 
         # Encrypt the password
@@ -85,6 +86,10 @@ def signout():
 def login():
     return User().login()
 
+@app.route('/history/')
+def history():
+    return render_template('history.html')
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -108,116 +113,123 @@ def interface_option():
         selec =request.form.get('interfaces')
         capture = pyshark.LiveCapture(interface=selec)
         capture.sniff(timeout=2)
+        print(capture)
         data=[]
         if len(capture)==0:
             return "No Packet Found"
         else:
             for x in range(len(capture)):
-                # Appending Protocol
-                data.append(list())
                 try:
-                    val=capture[x].ip.proto
-                    if val=='6':
-                        data[x].append(1)
-                    elif val=='17':
-                        data[x].append(2)
-                    else:
-                        data[x].append(3)
-                except:
-                    data[x].append(0)
-
-                # Appending land 
-                if val=='6':    
-                    if capture[x].eth.dst==capture[x].eth.src and capture[x].tcp.srcport==capture[x].tcp.dstport:
-                        data[x].append(0)
-                    else:
-                        data[x].append(1)
-                elif val=='17':
-                    if capture[x].eth.dst==capture[x].eth.src and capture[x].udp.srcport==capture[x].udp.dstport:
-                        data[x].append(0)
-                    else:
-                        data[x].append(1)
-
-
-                # Appending urgent
-                # I have a doubt here in the definition it is mentioned that in the same connection.
-                z=0
-                for y in range(len(capture)):
-                    if(capture[x].ip.proto=='6'):
-                        # Adding exception because eventhough it is passing the if condition, it is throwing the error that it can't find tcp.flags_urg parameter.
-                        try:
-                            if capture[x].eth.dst==capture[y].eth.dst and capture[x].eth.src==capture[y].eth.src and (capture[y].tcp.flags_urg==1):
-                                z=z+1
-                        except:
-                            continue
-                data[x].append(z)
-
-                # Appending count
-                z=0
-                for y in range(len(capture)):
-                    if capture[x].eth.dst==capture[y].eth.dst:
-                        z=z+1
-                data[x].append(z)
-
-                # Appending srv_count
-                z=0
-                for y in range(len(capture)):
-                    if val=='6': 
-                        try:      
-                            if capture[x].tcp.dstport==capture[y].tcp.dstport:
-                                z=z+1
-                        except:
-                            continue
-                    elif val=='17':
-                        try:
-                            if capture[x].udp.dstport==capture[y].udp.dstport:
-                                z=z+1
-                        except:
-                            continue        
-                data[x].append(z)
-
-                # Appending dst_host_count
-                z=0
-                for y in range(len(capture)):
-                    try:    
-                        if capture[x].ip.dst_host==capture[y].ip.dst_host:
-                            z=z+1
+                    # Appending Protocol
+                    data.append(list())
+                    try:
+                        val=capture[x].ip.proto
+                        print("Inside")
+                        if val=='6':
+                            data[x].append(1)
+                        elif val=='17':
+                            data[x].append(2)
+                        else:
+                            data[x].append(3)
                     except:
-                        continue
-                data[x].append(z)
+                        data[x].append(0)
 
-                # Appending host_srv_count    IT IS THE SAME CODE AS THE SRV_COUNT BECAUSE I DON'T UNDERSTAND THE DIFF BETWEEN THEM
-                z=0
-                for y in range(len(capture)):
-                    if val=='6':
+                    # Appending land 
+                    if val=='6':    
+                        if capture[x].eth.dst==capture[x].eth.src and capture[x].tcp.srcport==capture[x].tcp.dstport:
+                            data[x].append(0)
+                        else:
+                            data[x].append(1)
+                    elif val=='17':
+                        if capture[x].eth.dst==capture[x].eth.src and capture[x].udp.srcport==capture[x].udp.dstport:
+                            data[x].append(0)
+                        else:
+                            data[x].append(1)
+
+
+                    # Appending urgent
+                    # I have a doubt here in the definition it is mentioned that in the same connection.
+                    z=0
+                    for y in range(len(capture)):
+                        if(capture[x].ip.proto=='6'):
+                            # Adding exception because eventhough it is passing the if condition, it is throwing the error that it can't find tcp.flags_urg parameter.
+                            try:
+                                if capture[x].eth.dst==capture[y].eth.dst and capture[x].eth.src==capture[y].eth.src and (capture[y].tcp.flags_urg==1):
+                                    z=z+1
+                            except:
+                                continue
+                    data[x].append(z)
+
+                    # Appending count
+                    z=0
+                    for y in range(len(capture)):
+                        if capture[x].eth.dst==capture[y].eth.dst:
+                            z=z+1
+                    data[x].append(z)
+
+                    # Appending srv_count
+                    z=0
+                    for y in range(len(capture)):
+                        if val=='6': 
+                            try:      
+                                if capture[x].tcp.dstport==capture[y].tcp.dstport:
+                                    z=z+1
+                            except:
+                                continue
+                        elif val=='17':
+                            try:
+                                if capture[x].udp.dstport==capture[y].udp.dstport:
+                                    z=z+1
+                            except:
+                                continue        
+                    data[x].append(z)
+
+                    # Appending dst_host_count
+                    z=0
+                    for y in range(len(capture)):
                         try:    
-                            if capture[x].tcp.dstport==capture[y].tcp.dstport:
+                            if capture[x].ip.dst_host==capture[y].ip.dst_host:
                                 z=z+1
                         except:
                             continue
-                    elif val=='17':
-                        try:
-                            if capture[x].udp.dstport==capture[y].udp.dstport:
-                                z=z+1  
-                        except:
-                            continue      
-                data[x].append(z)
+                    data[x].append(z)
 
-                # Append host mac
+                    # Appending host_srv_count    IT IS THE SAME CODE AS THE SRV_COUNT BECAUSE I DON'T UNDERSTAND THE DIFF BETWEEN THEM
+                    z=0
+                    for y in range(len(capture)):
+                        if val=='6':
+                            try:    
+                                if capture[x].tcp.dstport==capture[y].tcp.dstport:
+                                    z=z+1
+                            except:
+                                continue
+                        elif val=='17':
+                            try:
+                                if capture[x].udp.dstport==capture[y].udp.dstport:
+                                    z=z+1  
+                            except:
+                                continue      
+                    data[x].append(z)
 
-                data[x].append(capture[x].ip.src)
+                    # Append host mac
 
-                # Append dest mac
+                    data[x].append(capture[x].ip.src)
 
-                data[x].append(capture[x].ip.dst)
+                    # Append dest mac
+
+                    data[x].append(capture[x].ip.dst)
+                except:
+                    continue
             
             # Converting to datafram
             
             df = pd.DataFrame(data)
+
             # df.to_csv('live.csv', index=False, header=False)    This was for csv
             #print(df)
             clf= pickle.load(open('finalized_model.sav', 'rb'))
             x=df.iloc[:,:-2].values
+            
             result = clf.predict(x)
             nor=[]
             ano=[]
@@ -233,7 +245,8 @@ def interface_option():
             textnote.append(" MAC Address of this device is :  {} ".format(gma()))
             textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
             s.close()
-            
+
+            textnote.append("User :" + str(session['user']['_id']))
             textnote.append(" Packets found are {} ".format(len(capture)))
             textnote.append(" Anomaly found are {} ".format(sum(ano)))
             
@@ -244,6 +257,7 @@ def interface_option():
                     found_anomanly_src.append(data[num-1][8])
 
                     #textnote.append("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+
                     textnote.append("protocol -" +str(data[num-1][0]))
                     textnote.append("land -" +str(data[num-1][1]))
                     textnote.append("urgent -" +str(data[num-1][2]))
@@ -255,9 +269,20 @@ def interface_option():
                     textnote.append("SRC IP Address -" +str(data[num-1][8]))
                     textnote.append("    ")
                 num=num+1
+
+            #inserting records into the User's Database. Need to work on it.... db.users.updateOne is not working.
+            # db.users.updateOne(
+            #             {
+            #                 "_id": session['user']['_id']
+            #             },
+            #             {
+            #                 "$push": {
+            #                     history: jsonify(textnote),
+            #                 },
+            #             })
+
             return jsonify(textnote)
-            
-        
+              
 if __name__== "__main__":
     app.run(debug=True)
 
