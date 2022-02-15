@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request, jsonify, session, redirect
 from functools import wraps
 import psutil
+import numpy as np
 import pyshark
 import pandas as pd
 import pickle
@@ -229,7 +230,7 @@ def interface_option():
             #print(df)
             clf= pickle.load(open('finalized_model.sav', 'rb'))
             x=df.iloc[:,:-2].values
-            
+            print(np.any(np.isnan(x)))
             result = clf.predict(x)
             nor=[]
             ano=[]
