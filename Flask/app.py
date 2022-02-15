@@ -95,6 +95,10 @@ def history():
 def home():
     return render_template('home.html')
 
+@app.route('/index')
+def index():
+    return render_template('index.html')
+
 #@app.route('/user/signup', methods=['POST'])
 #def signup():
 #    return User().signup()
@@ -113,7 +117,7 @@ def interface_option():
     else:
         selec =request.form.get('interfaces')
         capture = pyshark.LiveCapture(interface=selec)
-        capture.sniff(timeout=2)
+        capture.sniff(timeout=5)
         print(capture)
         data=[]
         penalty = 0
