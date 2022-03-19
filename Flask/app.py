@@ -91,11 +91,11 @@ def login():
 def history():
     return render_template('history.html')
 
-@app.route('/')
+@app.route('/home')
 def home():
     return render_template('home.html')
 
-@app.route('/index')
+@app.route('/')
 def index():
     return render_template('index.html')
 
@@ -117,7 +117,7 @@ def interface_option():
     else:
         selec =request.form.get('interfaces')
         capture = pyshark.LiveCapture(interface=selec)
-        capture.sniff(timeout=5)
+        capture.sniff(timeout=6)
         print(capture)
         data=[]
         penalty = 0
