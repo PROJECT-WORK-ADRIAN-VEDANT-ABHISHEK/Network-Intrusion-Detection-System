@@ -11,6 +11,7 @@ from getmac import get_mac_address as gma
 import pymongo
 import uuid
 from passlib.hash import pbkdf2_sha256
+from pathlib import Path
 #from user.models import User
 
 
@@ -234,7 +235,8 @@ def interface_option():
 
             # df.to_csv('live.csv', index=False, header=False)    This was for csv
             #print(df)
-            clf= pickle.load(open('finalized_model.sav', 'rb'))
+            HERE = Path(__file__).parent
+            clf= pickle.load(open(HERE / "finalized_model.sav","rb"))
             x=df.iloc[:,:-2].values
             result = clf.predict(x)
             nor=[]
@@ -276,7 +278,7 @@ def interface_option():
                     textnote.append("    ")
                 num=num+1
 
-            #inserting records into the User's Database. Need to work on it.... db.users.updateOne is not working.
+            
             db.users.update_one(
                         {
                             "_id": session['user']['_id']
@@ -295,8 +297,7 @@ def interface_option():
                     "history":1
                 }
                 )
-            return hist
-
+            return jsonify(hist)
               
 if __name__== "__main__":
     app.run(debug=True)

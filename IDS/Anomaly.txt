@@ -1,28 +1,6 @@
- MAC Address of this device is :  34:7d:f6:ca:b4:9e 
- IP Address of this device is :  192.168.0.103 
+ MAC Address of this device is :  1c:4d:70:68:cb:58 
+ IP Address of this device is :  192.168.1.106 
 
- Packets found are 266 
- Anomaly found are 5 
-
-protocol -1
-land -1
-urgent -0
-count -44
-srv_count -3
-dst_host_count -3
-Dst_host_srv_count -3
-Dst IP Address -192.168.0.103
-SRC IP Address -162.159.134.234
-
-
-protocol -1
-land -1
-urgent -0
-count -217
-srv_count -2
-dst_host_count -217
-Dst_host_srv_count -2
-Dst IP Address -162.159.134.234
-SRC IP Address -192.168.0.103
-
+ Packets found are 2 
+ Anomaly found are 0 
 
