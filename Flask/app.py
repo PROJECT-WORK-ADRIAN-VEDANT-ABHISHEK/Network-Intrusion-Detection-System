@@ -277,15 +277,15 @@ def interface_option():
                 num=num+1
 
             #inserting records into the User's Database. Need to work on it.... db.users.updateOne is not working.
-            # db.users.updateOne(
-            #             {
-            #                 "_id": session['user']['_id']
-            #             },
-            #             {
-            #                 "$push": {
-            #                     history: jsonify(textnote),
-            #                 },
-            #             })
+            db.users.updateOne(
+                        {
+                            "_id": session['user']['_id']
+                        },
+                        {
+                            $set: {
+                                "history": jsonify(textnote)
+                            },
+                        })
 
             return jsonify(textnote)
 
