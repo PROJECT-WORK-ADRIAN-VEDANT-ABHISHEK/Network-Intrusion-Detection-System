@@ -12,6 +12,7 @@ import pymongo
 import uuid
 from passlib.hash import pbkdf2_sha256
 from pathlib import Path
+import datetime
 #from user.models import User
 
 
@@ -237,67 +238,73 @@ def interface_option():
             HERE = Path(__file__).parent
             clf= pickle.load(open(HERE / "finalized_model.sav","rb"))
             x=df.iloc[:,:-2].values
-            result = clf.predict(x)
-            nor=[]
-            ano=[]
-            nor=[1 for x in result if x==1]
-            ano=[1 for x in result if x==0]
+            if len(x)!=0:
+                result = clf.predict(x)
+                nor=[]
+                ano=[]
+                nor=[1 for x in result if x==1]
+                ano=[1 for x in result if x==0]
 
-            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            s.connect(("8.8.8.8", 80))
-            textnote=[]
+                s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+                s.connect(("8.8.8.8", 80))
+                textnote=[]
 
-            num=1
-        
-            textnote.append(" MAC Address of this device is :  {} ".format(gma()))
-            textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
-            s.close()
+                num=1
+                dtime = datetime.datetime.now()
+                textnote.append(" Date and Time : {}".format(dtime))
+                textnote.append(" MAC Address of this device is :  {} ".format(gma()))
+                textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
+                s.close()
 
-            # textnote.append("User :" + str(session['user']['_id']))
-            textnote.append(" Packets found are {} ".format(len(capture)))
-            textnote.append(" Anomaly found are {} ".format(sum(ano)))
-            
-            found_anomanly_src=[]
-            for element in result:
-                if element==0 and data[num-1][8] not in found_anomanly_src:
+                # textnote.append("User :" + str(session['user']['_id']))
+                
+                
+                textnote.append(" Packets found are {} ".format(len(capture)))
+                textnote.append(" Anomaly found are {} ".format(sum(ano)))
+                
+                found_anomanly_src=[]
+                for element in result:
+                    if element==0 and data[num-1][8] not in found_anomanly_src:
 
-                    found_anomanly_src.append(data[num-1][8])
+                        found_anomanly_src.append(data[num-1][8])
 
-                    #textnote.append("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
+                        #textnote.append("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
 
-                    textnote.append("protocol -" +str(data[num-1][0]))
-                    textnote.append("land -" +str(data[num-1][1]))
-                    textnote.append("urgent -" +str(data[num-1][2]))
-                    textnote.append("count -" +str(data[num-1][3]))
-                    textnote.append("srv_count -" +str(data[num-1][4]))
-                    textnote.append("dst_host_count -" +str(data[num-1][5]))
-                    textnote.append("Dst_host_srv_count -" +str(data[num-1][6]))
-                    textnote.append("Dst IP Address -" +str(data[num-1][7]))
-                    textnote.append("SRC IP Address -" +str(data[num-1][8]))
-                    textnote.append("    ")
-                num=num+1
+                        textnote.append("protocol -" +str(data[num-1][0]))
+                        textnote.append("land -" +str(data[num-1][1]))
+                        textnote.append("urgent -" +str(data[num-1][2]))
+                        textnote.append("count -" +str(data[num-1][3]))
+                        textnote.append("srv_count -" +str(data[num-1][4]))
+                        textnote.append("dst_host_count -" +str(data[num-1][5]))
+                        textnote.append("Dst_host_srv_count -" +str(data[num-1][6]))
+                        textnote.append("Dst IP Address -" +str(data[num-1][7]))
+                        textnote.append("SRC IP Address -" +str(data[num-1][8]))
+                        textnote.append("    ")
+                    num=num+1
 
-            
-            db.users.update_one(
-                        {
-                            "_id": session['user']['_id']
-                        },
-                        {
-                            "$push": {
-                                "history": textnote
+                
+                db.users.update_one(
+                            {
+                                "_id": session['user']['_id']
                             },
-                        })
-            hist = []
+                            {
+                                "$push": {
+                                    "history": textnote
+                                },
+                            })
+                hist = []
 
-            hist = list(db.users.find({
-                "_id": session['user']['_id']
-                },
-                {
-                    "history":1
-                }
-                ))
-            # response = make_response(render_template('output.html',hist=hist))
-            return jsonify(hist)
+                hist = list(db.users.find({
+                    "_id": session['user']['_id']
+                    },
+                    {
+                        "history":1
+                    }
+                    ))
+                # response = make_response(render_template('output.html',hist=hist))
+                return jsonify(hist)
+            else:
+                return "Packet Not Found"
               
 if __name__== "__main__":
     app.run(debug=True)
