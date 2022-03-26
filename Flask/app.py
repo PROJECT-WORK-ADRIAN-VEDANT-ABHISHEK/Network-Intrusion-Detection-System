@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, request, jsonify, session, redirect
+from flask import Flask, render_template,make_response, redirect, url_for, request, jsonify, session, redirect
 from functools import wraps
 import psutil
 import numpy as np
@@ -49,7 +49,7 @@ class User:
             "name": request.form.get('name'),
             "email":request.form.get('email'),
             "password":request.form.get('password'),
-            "history":""
+            "history":[]
         }
 
         # Encrypt the password
@@ -127,7 +127,6 @@ def interface_option():
         else:
             for x in range(len(capture)):
                 list_var = x - penalty
-                print("In")
                 # Appending Protocol
                 try:
                     val=capture[x].ip.proto
@@ -254,7 +253,7 @@ def interface_option():
             textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
             s.close()
 
-            textnote.append("User :" + str(session['user']['_id']))
+            # textnote.append("User :" + str(session['user']['_id']))
             textnote.append(" Packets found are {} ".format(len(capture)))
             textnote.append(" Anomaly found are {} ".format(sum(ano)))
             
@@ -290,13 +289,14 @@ def interface_option():
                         })
             hist = []
 
-            hist = db.users.find({
+            hist = list(db.users.find({
                 "_id": session['user']['_id']
                 },
                 {
                     "history":1
                 }
-                )
+                ))
+            # response = make_response(render_template('output.html',hist=hist))
             return jsonify(hist)
               
 if __name__== "__main__":
