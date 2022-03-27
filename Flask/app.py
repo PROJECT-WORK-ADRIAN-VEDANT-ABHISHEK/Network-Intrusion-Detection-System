@@ -302,7 +302,8 @@ def interface_option():
                     }
                     ))
                 # response = make_response(render_template('output.html',hist=hist))
-                return jsonify(hist)
+                
+                return render_template("output.html")
             else:
                 return "Packet Not Found"
               

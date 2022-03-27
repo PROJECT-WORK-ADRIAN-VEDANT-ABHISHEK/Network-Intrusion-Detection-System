@@ -2,7 +2,22 @@
 
 {% block content %}
 
-<h1 align="left">History </h1>
-<h2 align="left"> {% print(hist) %} </h2>
+<div class="container">
+	<h1 align="center"> IDS Result   </h1>
+	{% for hst in session['user']['history'] %}
+	
+		<div class="card">
+			<p>{{hst[0]}}</p>
+            <p>{{hst[1]}}</p>
+			<p>{{hst[2]}}</p>
+			<p>{{hst[3]}}</p>
+			<p>{{hst[4]}}</p>
+            
+		</div>
+	
+	{% endfor %}
+
+
+</div>
 
 {% endblock %}
