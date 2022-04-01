@@ -91,7 +91,7 @@ def login():
 
 @app.route('/history/')
 def history():
-    return render_template('history.html')
+    return render_template('history.html',hst = session['user']['history'])
 
 @app.route('/home')
 def home():
@@ -303,7 +303,7 @@ def interface_option():
                     ))
                 # response = make_response(render_template('output.html',hist=hist))
                 
-                return render_template("output.html")
+                return render_template("output.html",hst = session['user']['history'])
             else:
                 return "Packet Not Found"
               
