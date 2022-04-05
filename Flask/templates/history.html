@@ -4,15 +4,28 @@
 
 <div class="container">
 	<h1 align="center"> User History </h1>
-
-		<!-- for getting one particular array and a value, remove the for loop and in the <p> tags, put: hst[1][0] -->
-
-		{% for arr in hst %}
-		<div class="card">
-			<p> {{arr[3]}}</p>
-            
-		</div>
+		{% set count = 0 %}
+		{% for arr in hst[::-1] %}
+		  <div class="card">
+		
+		     
+		        <button class="btn btn-link" type="button">
+		          {{arr[0]}}
+		        </button>
+		    
+		    
+		      <div class="card-body">
+		        <p>{{arr[1]}}</p>
+		        <p>{{arr[2]}}</p>
+		        <p>{{arr[3]}}</p>
+		        <p>{{arr[4]}}</p>
+		      </div>
+  			</div>
+		{% set count = count + 1 %} 
 		{% endfor %}
+		{% if count == 0 %}
+			<p align="center"> No more records found. Keep scanning</p>
+		{% endif %}
 </div>
 
 {% endblock %}

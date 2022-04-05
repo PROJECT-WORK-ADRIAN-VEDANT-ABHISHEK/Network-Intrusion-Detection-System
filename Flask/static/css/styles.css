@@ -72,6 +72,7 @@ p {
   box-shadow: 0 8px 26px -4px rgba(0,0,0,0.15);
   border-radius: 5px;
   background: var(--white);
+  
 }
 
 @media only screen and (max-width: 520px) {
@@ -179,4 +180,8 @@ input[type=submit] {
 
 #sub_but{
   margin: 20px;
+}
+
+#histcard{
+  display: inline;
 }
