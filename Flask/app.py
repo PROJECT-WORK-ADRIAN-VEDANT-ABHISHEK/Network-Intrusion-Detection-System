@@ -303,7 +303,7 @@ def interface_option():
                     ))
                 # response = make_response(render_template('output.html',hist=hist))
                 
-                return render_template("output.html",hst = session['user']['history'])
+                return render_template("output.html",hst = textnote)
             else:
                 return "Packet Not Found"
               
