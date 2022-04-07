@@ -19,7 +19,7 @@ import datetime
 app = Flask(__name__)
 app.secret_key= b'\r\xb2XX\x1d\xd3\x0b\xe2\x9b\xe9\x05\xc8ln\xa1$'
 
-#database
+#database connect
 client = pymongo.MongoClient('127.0.0.1', 27017)
 db = client.user_login_system
 

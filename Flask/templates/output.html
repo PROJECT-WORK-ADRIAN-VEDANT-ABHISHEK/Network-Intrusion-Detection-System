@@ -5,10 +5,11 @@
 <div class="container">
 	<h1 align="center"> IDS Result   </h1>
 		<div class="card">
-			<p>{{hst[1]}}</p>
-			<p>{{hst[2]}}</p>
-			<p>{{hst[3]}}</p>
-			<p>{{hst[4]}}</p>
+			{% for arr in hst %}
+			<p>{{arr}}</p>
+			{% endfor %}
+			
+			
             
 		</div>
 	
