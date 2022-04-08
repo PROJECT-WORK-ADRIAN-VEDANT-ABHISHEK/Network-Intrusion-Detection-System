@@ -251,16 +251,16 @@ def interface_option():
 
                 num=1
                 dtime = datetime.datetime.now()
-                textnote.append(" Date and Time : {}".format(dtime))
-                textnote.append(" MAC Address of this device is :  {} ".format(gma()))
-                textnote.append(" IP Address of this device is :  {} ".format(s.getsockname()[0]))
+                textnote.append(str(dtime)) # Date & time
+                textnote.append((gma())) #Mac address of this device
+                textnote.append((s.getsockname()[0])) # IP Address of this device
                 s.close()
 
                 # textnote.append("User :" + str(session['user']['_id']))
                 
                 
-                textnote.append(" Packets found are {} ".format(len(capture)))
-                textnote.append(" Anomaly found are {} ".format(sum(ano)))
+                textnote.append(len(capture)) #packets Found
+                textnote.append(sum(ano)) # Anamoly found
                 
                 found_anomanly_src=[]
                 for element in result:
@@ -270,16 +270,16 @@ def interface_option():
 
                         #textnote.append("Packet:- "+ str(num) + " Predicted "+ str(element) + "\n")
 
-                        textnote.append("protocol -" +str(data[num-1][0]))
-                        textnote.append("land -" +str(data[num-1][1]))
-                        textnote.append("urgent -" +str(data[num-1][2]))
-                        textnote.append("count -" +str(data[num-1][3]))
-                        textnote.append("srv_count -" +str(data[num-1][4]))
-                        textnote.append("dst_host_count -" +str(data[num-1][5]))
-                        textnote.append("Dst_host_srv_count -" +str(data[num-1][6]))
-                        textnote.append("Dst IP Address -" +str(data[num-1][7]))
-                        textnote.append("SRC IP Address -" +str(data[num-1][8]))
-                        textnote.append("    ")
+                        textnote.append((data[num-1][0])) # Protocol
+                        textnote.append((data[num-1][1])) # Land
+                        textnote.append((data[num-1][2])) # Urgent
+                        textnote.append((data[num-1][3])) # Count
+                        textnote.append((data[num-1][4])) #srv count
+                        textnote.append((data[num-1][5])) #dst_host_count
+                        textnote.append((data[num-1][6])) #Dst_host_srv_count
+                        textnote.append(str(data[num-1][7])) #Dst IP Address
+                        textnote.append(str(data[num-1][8])) #Src IP Address
+                        textnote.append("-") #End of one record
                     num=num+1
 
                 

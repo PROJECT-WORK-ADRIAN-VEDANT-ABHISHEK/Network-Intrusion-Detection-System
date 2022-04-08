@@ -2,30 +2,34 @@
 
 {% block content %}
 
-<div class="container">
+<div class="flex-container">
 	<h1 align="center"> User History </h1>
-		{% set count = 0 %}
 		{% for arr in hst[::-1] %}
-		  <div class="card">
+		  <div class="card flex-item">
 		
 		     
 		        <button class="btn btn-link" type="button">
-		          {{arr[0]}}
+		          <p>Date & Time: {{arr[0]}}</p>
 		        </button>
 		    
 		    
 		      <div class="card-body">
-		        <p>{{arr[1]}}</p>
-		        <p>{{arr[2]}}</p>
-		        <p>{{arr[3]}}</p>
-		        <p>{{arr[4]}}</p>
+		        <p>Mac Address of this device: {{arr[1]}}</p>
+		        <p>IP Address of this device: {{arr[2]}}</p>
+		        <p>Packets found: {{arr[3]}}</p>
+		        <p>Anomaly found: {{arr[4]}}</p>
+		
+
+		        {% if arr|length > 5 %}
+		        <p>Anomalous source IP:</p>
+			        {% for x in range(13,arr|length,10) %}
+			        	<p>{{arr[x]}}</p>
+			        {% endfor %}
+			    {% endif %}
 		      </div>
-  			</div>
-		{% set count = count + 1 %} 
+  			</div> 
 		{% endfor %}
-		{% if count == 0 %}
 			<p align="center"> No more records found. Keep scanning</p>
-		{% endif %}
 </div>
 
 {% endblock %}
